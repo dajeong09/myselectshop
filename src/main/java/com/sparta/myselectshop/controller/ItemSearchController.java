@@ -13,10 +13,12 @@ import java.util.List;
 @Controller
 public class ItemSearchController {
     private final ItemSearchService itemSearchService;
+
     @Autowired
     public ItemSearchController(ItemSearchService itemSearchService) {
         this.itemSearchService = itemSearchService;
     }
+
     @GetMapping("/api/search")
     @ResponseBody
     public List<ItemDto> getItems(@RequestParam String query) throws IOException {
