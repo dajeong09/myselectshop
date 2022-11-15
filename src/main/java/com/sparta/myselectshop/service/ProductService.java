@@ -43,4 +43,9 @@ public class ProductService {
     public List<Product> getProducts(Long userId) {
         return productRepository.findAllByUserId(userId);
     }
+
+    // 모든 상품 조회 (관리자용)
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 }

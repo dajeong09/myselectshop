@@ -3,9 +3,11 @@ package com.sparta.myselectshop.controller;
 import com.sparta.myselectshop.dto.ProductMypriceRequestDto;
 import com.sparta.myselectshop.dto.ProductRequestDto;
 import com.sparta.myselectshop.model.Product;
+import com.sparta.myselectshop.model.UserRoleEnum;
 import com.sparta.myselectshop.security.UserDetailsImpl;
 import com.sparta.myselectshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,5 +52,12 @@ public class ProductController {
         Long userId = userDetails.getUser().getId();
 
         return productService.getProducts(userId);
+    }
+
+    // (관리자용) 등록된 모든 상품 목록 조회
+    @Secured(value = UserRoleEnum.Authority.ADMIN)
+    @GetMapping("/api/admin/products")
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
     }
 }
